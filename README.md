@@ -1,6 +1,6 @@
 # WMT AI — design preview
 
-Current landing-page design snapshot, including block alternatives.
+Current landing-page design snapshot, with selected block designs only. The local variant picker is not included.
 
 Preview: https://darlingfxx02.github.io/wmt-ai-preview/
 

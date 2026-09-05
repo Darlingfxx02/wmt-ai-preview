@@ -1,6 +1,0 @@
-.block-variant-panel{position:fixed;z-index:80;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;padding:7px;border:1px solid #d9dce1;border-radius:30px;background:#fff;box-shadow:0 4px 20px #00000014;color:#171719}
-.block-variant-panel button{display:grid;place-items:center;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:#f0f1f3;color:inherit;font:inherit;font-size:14px;cursor:pointer}
-.block-variant-panel button:hover{background:#e1e3e7}
-.block-variant-panel button[aria-pressed="true"]{background:#171719;color:#fff}
-.block-variant-panel button:focus-visible{outline:2px solid #ff5331;outline-offset:2px}
-@media(max-width:600px){.block-variant-panel{right:6px;padding:5px;gap:5px}.block-variant-panel button{width:30px;height:30px}}

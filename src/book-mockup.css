@@ -1,0 +1,6 @@
+/* Photographic front-facing book, rendered from the licensed PSD. */
+.book-mockup{width:82%;aspect-ratio:840/1210;margin:0 auto 32px;position:relative;transition:transform .35s ease}
+.book-mockup img{display:block;width:100%;height:100%;object-fit:contain}
+@media(hover:hover){.research-alt__item:hover .book-mockup{transform:translateY(-4px)}}
+@container(max-width:600px){.book-mockup{max-width:280px;margin-bottom:24px}}
+@media(prefers-reduced-motion:reduce){.book-mockup{transition:none}}

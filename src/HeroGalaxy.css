@@ -1,0 +1,13 @@
+.hero-nomu-core h1 .vector-space{background:#000}
+.vector-space svg{display:block;width:100%;height:100%}
+.space-twinkle{transform-box:fill-box;transform-origin:center;animation:space-star-appear 5s ease-in-out infinite}
+.space-planet-drift{animation:space-planet-float 7s ease-in-out infinite alternate}
+.space-moon-drift{animation:space-planet-float 9s ease-in-out -3s infinite alternate-reverse}
+.space-comet{opacity:0;animation:space-comet-flight 6.8s linear -1s infinite}
+.space-comet--second{animation-name:space-comet-flight-second;animation-duration:9.3s;animation-delay:-5s}
+.vector-space:not(.is-active) *{animation-play-state:paused}
+@keyframes space-star-appear{0%,15%,100%{opacity:0;transform:scale(.15) rotate(0deg)}30%,46%{opacity:.85;transform:scale(.72) rotate(0deg)}62%,88%{opacity:.15;transform:scale(.45) rotate(0deg)}}
+@keyframes space-planet-float{from{transform:translateY(-3px)}to{transform:translateY(4px)}}
+@keyframes space-comet-flight{0%,68%{opacity:0;transform:translate(-100px,18px) rotate(5deg)}70%{opacity:1}87%{opacity:1}91%,100%{opacity:0;transform:translate(1130px,118px) rotate(5deg)}}
+@keyframes space-comet-flight-second{0%,77%{opacity:0;transform:translate(-80px,124px) rotate(-5deg)}79%{opacity:1}95%{opacity:1}99%,100%{opacity:0;transform:translate(1100px,24px) rotate(-5deg)}}
+@media(prefers-reduced-motion:reduce){.vector-space *{animation:none!important}.space-twinkle{opacity:.8}.space-comet{display:none}}

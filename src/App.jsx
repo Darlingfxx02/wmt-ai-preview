@@ -2,15 +2,15 @@ import HeroGalaxy from './HeroGalaxy';
 import React, { useEffect, useId, useRef, useState } from "react";
 import Matter from "matter-js";
 import ClientCases from "./ClientCases";
-import SituationMotion, { ResultMotion } from "./SituationMotion";
+import BlockVariants from "./BlockVariants";
 import FooterVariants from "./FooterVariants";
 import ContactMessage from "./ContactMessage";
 import OrangeMaterial from "./OrangeMaterial";
 import ResearchAlternative from "./ResearchAlternatives";
 import "./lower-sections.css";
 import "./page-finale.css";
-import igorPortrait from "./assets/igor-nikitin-founder.jpg";
-import wmtLogoFull from "./assets/wmt-logo-full.png";
+import igorPortrait from "../../src/assets/igor-nikitin-founder.jpg";
+import wmtLogoFull from "../../src/assets/wmt-logo-full.png";
 
 const steps = [
   ["Общие цели руководства", "и команды. Единый подход", "и правила трансформации."],
@@ -798,11 +798,13 @@ function DirectionsShowcase() {
       <h2><span>Основные направления</span></h2>
     </header>
     <div className="directions-mosaic">
+      <PlusDivider className="directions-divider" />
       <DirectionRow className="direction-tile direction-tile--learn">
         <h3>Подготовка и корпоративное обучение</h3>
         <p>Стратегические сессии, интенсивы, обучение команд, аудит текущей ситуации и формирование базы инициатив.</p>
         <details><summary>Подробнее<SoftPixelNumber arrow compact /></summary><p>Помогает компании подготовиться к изменениям и создать внутреннюю мотивацию к реальному внедрению.</p></details>
       </DirectionRow>
+      <PlusDivider className="directions-divider" />
       <DirectionRow className="direction-tile direction-tile--products">
         <div className="direction-tile__top"><span>02</span><span className="direction-tile__label">Продуктовая экосистема</span></div>
         <div className="product-copy-track"><div className="product-copy">
@@ -822,16 +824,19 @@ function DirectionsShowcase() {
           </div>
         </div>
       </DirectionRow>
+      <PlusDivider className="directions-divider" />
       <DirectionRow className="direction-tile direction-tile--build">
         <h3>Заказная разработка и интеграция</h3>
         <p>Разрабатываем и внедряем ИИ-решения под конкретные процессы и инфраструктуру клиента.</p>
         <details><summary>Подробнее<SoftPixelNumber arrow compact /></summary><p>От точечных инструментов до более сложных систем, интеграций и ИИ-контуров.</p></details>
       </DirectionRow>
+      <PlusDivider className="directions-divider" />
       <DirectionRow className="direction-tile direction-tile--team">
         <h3>Усиление команды клиента</h3>
         <p>В отдельных сценариях подключаем специалистов WMT для развития и поддержки ИИ-инфраструктуры клиента в формате аутстаффинга.</p>
         <details><summary>Подробнее<SoftPixelNumber arrow compact /></summary><p>Это отдельное направление нашей группы компаний.</p></details>
       </DirectionRow>
+      <PlusDivider className="directions-divider" />
       <DirectionRow className="direction-tile direction-tile--kids">
         <div className="direction-tile__top"><span>05</span><span className="direction-tile__label">WMT Kids</span></div>
         <div className="direction-tile__kids-copy"><h3>Обучение для детей</h3>
@@ -905,25 +910,26 @@ function AboutStatement() {
 }
 
 function WhyBento() {
-  return <section className="why section"><div className="shell">
+  const visualSet = 'bento-visuals-flat';
+  return <section className="why section" id="why"><div className="shell">
     <h2>Когда приходят к WMT AI</h2>
     <div className="why-bento">
-      {situations.slice(0,3).map((text,i)=><article className="why-bento__situation" key={text}>
+      {situations.slice(0,3).map((text,i)=><article className={`why-bento__situation${i === 0 && visualSet === 'bento-visuals-flat' ? ' why-bento__situation--map' : ''}`} key={text}>
         <h3>{text}</h3>
         <p>{['Находим точку входа и собираем понятный маршрут.', 'Отделяем перспективные идеи от информационного шума.', 'Соединяем людей, процессы и данные в рабочую систему.'][i]}</p>
-        <SituationMotion type={i}/>
+        {i === 0 && visualSet === 'bento-visuals-flat' ? <><span className="why-bento__art" aria-hidden="true" /><img className="why-bento__map-background" src="/wmt-ai-preview/bento-visuals-flat/route-background.svg" width="400" height="600" alt="" aria-hidden="true" /></> : <img className="why-bento__art" src={`/wmt-ai-preview/${visualSet}/${['route','filter','system'][i]}.svg`} width="400" height="400" alt="" aria-hidden="true" />}
       </article>)}
       <article className="why-bento__result">
-        <ResultMotion />
         <div className="why-bento__result-copy"><h3>{situations[3]}</h3>
         <p>Работа должна менять экономику, а не количество презентаций. Поэтому связываем инициативы с процессами, владельцами и критериями результата.</p></div>
+        <img className="why-bento__art why-bento__art--wide" src={`/wmt-ai-preview/${visualSet}/outcome.svg`} width="640" height="260" alt="" aria-hidden="true" />
       </article>
       <div className="why-bento__effects">
         {[
           ['−','Меньше системных расходов','Рутину забирает ИИ, а люди убирают потери в процессах.'],
           ['+','Больше доходов','Быстрее решения, сильнее ключевые коммерческие процессы.'],
           ['×','Новые деньги','Продукты и направления, которые раньше были не по карману.'],
-        ].map(([symbol,title,copy])=><article key={title}><div><h3>{title}</h3><p>{copy}</p></div><span aria-hidden="true">{symbol}</span></article>)}
+        ].map(([,title,copy],i)=><article key={title}><div><h3>{title}</h3><p>{copy}</p></div><img className="why-bento__effect-art" src={`/wmt-ai-preview/icons/bento/${['trend-down','trend-up','money-add'][i]}.svg`} width="32" height="32" alt="" aria-hidden="true" /></article>)}
       </div>
     </div>
   </div></section>;
@@ -991,11 +997,61 @@ function EventScene() {
   </div>;
 }
 
+function ContactForm() {
+  return <form onSubmit={e=>e.preventDefault()}><label>Имя<input name="name" autoComplete="name" placeholder="Как к вам обращаться"/></label><label>Рабочая почта<input type="email" name="email" autoComplete="email" placeholder="name@company.ru"/></label><ContactMessage /><button type="submit"><span>Оставить заявку</span><SoftPixelNumber arrow compact /></button><small>Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</small></form>;
+}
+
+function ContactModal() {
+  const dialogRef = useRef(null);
+  const [opened, setOpened] = useState(false);
+  useEffect(() => {
+    let trigger = null;
+    let previousOverflow = '';
+    const dialog = dialogRef.current;
+    const open = event => {
+      const link = event.target.closest?.('a');
+      if (!link || link.closest('.connect-section') || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const href = link.getAttribute('href') || '';
+      if (href !== '#contact' && !href.startsWith('mailto:info@wmt-ai.ru?subject=')) return;
+      event.preventDefault();
+      if (dialog.open) return;
+      trigger = link;
+      previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      setOpened(true);
+      dialog.showModal();
+    };
+    const closed = () => {
+      document.body.style.overflow = previousOverflow;
+      setOpened(false);
+      if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+    };
+    document.addEventListener('click', open);
+    dialog.addEventListener('close', closed);
+    return () => {
+      document.removeEventListener('click', open);
+      dialog.removeEventListener('close', closed);
+      if (dialog.open) document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+  return <dialog ref={dialogRef} className="contact-modal" aria-labelledby="contact-modal-title" onClick={event => {
+    if (event.target !== event.currentTarget) return;
+    const r = event.currentTarget.getBoundingClientRect();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) event.currentTarget.close();
+  }}>
+    <button className="contact-modal__close" type="button" aria-label="Закрыть форму" autoFocus onClick={() => dialogRef.current.close()}>×</button>
+    <h2 id="contact-modal-title">Обсудить первые шаги</h2>
+    <p>Расскажите, какая задача сейчас важнее всего. Мы вернёмся с вопросами по существу.</p>
+    {opened && <ContactForm />}
+  </dialog>;
+}
+
 function App() {
   const heroScrollRef = useNomuScroll();
   return <>
     <OrangeMaterial />
     <Header />
+    <ContactModal />
     <main id="top">
       <section ref={heroScrollRef} className="hero-nomu" aria-label="ИИ-трансформация WMT AI">
         <div className="hero-nomu-stage">
@@ -1019,7 +1075,19 @@ function App() {
         </div>
       </section>
 
-      <div id="method"><MethodJourney /></div>
+      <BlockVariants id="method" label="ИИ-трансформация на практике">
+      <MethodJourney />
+      <section className="finale-method" id="method-archive" aria-labelledby="finale-method-title">
+        <h2 id="finale-method-title">ИИ-трансформация<br />на практике</h2>
+        <div className="finale-method__steps">
+          {steps.map((step, i) => <article className="finale-method__step" key={stepTitles[i]}>
+            <SoftPixelNumber number={i + 1} textured />
+            <div><h3>{stepTitles[i]}</h3><p>{step.join(' ')}</p></div>
+          </article>)}
+          <a className="finale-method__cta" href="#contact"><SoftPixelNumber arrow compact /><span>Оставить заявку</span></a>
+        </div>
+      </section>
+      </BlockVariants>
       <div className="page-inner-guide">
       <div className="plus-divider" aria-hidden="true">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1050,7 +1118,26 @@ function App() {
       <WhyBento />
 
       <ClientCases Arrow={SoftPixelNumber} />
-      <div><div className="lower-sections">
+      <BlockVariants label="Игорь Никитин" initialVariant={1}>
+      <div className="lower-sections">
+      <section className="expert-section" id="expert" aria-labelledby="expert-title">
+        <div className="expert-identity">
+          <img className="expert-portrait" src={igorPortrait} alt="Игорь Никитин" loading="lazy" />
+          <div className="expert-caption"><h3>Игорь Никитин</h3><p>Основатель и CEO WMT AI</p></div>
+        </div>
+        <div className="expert-evidence">
+          <div className="expert-symbol" aria-hidden="true"><SoftPixelNumber arrow compact /></div>
+          <h2 id="expert-title">Практика, усиленная<br />академическим признанием</h2>
+          <div className="expert-facts">
+            <div><strong>400+</strong><p>сотрудников в глобальной команде</p></div>
+            <div><strong>50+</strong><p>ИИ-внедрений за 2024–2026 годы</p></div>
+            <div><strong>~$1M</strong><p>грант от топ-40 университета мира</p></div>
+            <div><strong>Патент</strong><p>и платформа IIGOR</p></div>
+          </div>
+        </div>
+      </section>
+      </div>
+      <div className="lower-sections">
         <section className="expert-section expert-section--mosaic" id="expert-mosaic" aria-labelledby="expert-mosaic-title">
           <div className="expert-identity">
             <img className="expert-portrait" src={igorPortrait} alt="Игорь Никитин" loading="lazy" />
@@ -1079,7 +1166,8 @@ function App() {
             </div>
           </div>
         </section>
-      </div></div>
+      </div>
+      </BlockVariants>
       <PlusDivider />
       <MaterialsNewsletter />
       <PlusDivider />
@@ -1091,15 +1179,32 @@ function App() {
       <div className="lower-sections page-finale">
 
 
-      <div id="research"><ResearchAlternative mode="shelf" researches={researches} Arrow={SoftPixelNumber} /></div>
+      <BlockVariants id="research" label="Наши исследования" initialVariant={3}>
+      <section className="insights-section" aria-labelledby="insights-title">
+        <div className="lower-heading"><h2 id="insights-title">Наши исследования</h2><p>Фиксируем изменения раньше, чем они становятся общим местом.</p></div>
+        <div className="insights-grid">{researches.map(([title, copy], i) => <article className={`insight insight--${i}`} key={title}>
+          <div className="insight-cover" aria-hidden="true">
+            {i === 0 && <div className="convergence-art">{Array.from({length: 7}, (_, n) => <i key={n} style={{'--n': n}} />)}<b>2027</b></div>}
+            {i === 1 && <div className="replacement-art">{Array.from({length: 25}, (_, n) => <i key={n} />)}</div>}
+            {i === 2 && <div className="forecast-art"><span>2025</span><SoftPixelNumber arrow compact /><span>2026</span></div>}
+          </div>
+          <div className="insight-copy"><h3>{title}</h3><p>{copy}</p><a href={`mailto:info@wmt-ai.ru?subject=${encodeURIComponent('Запрос исследования: ' + title)}`}><span>Запросить исследование</span><SoftPixelNumber arrow compact /></a></div>
+        </article>)}</div>
+      </section>
+      <ResearchAlternative mode="list" researches={researches} Arrow={SoftPixelNumber} />
+      <ResearchAlternative mode="compact" researches={researches} Arrow={SoftPixelNumber} />
+      <ResearchAlternative mode="shelf" researches={researches} Arrow={SoftPixelNumber} />
+      </BlockVariants>
 
-      <section className="press-section" aria-label="Публикации"><p>Авторские публикации<br/>в медиа</p><div><span>РБК</span><span>Forbes</span><span>vc.ru</span><span>Т—Ж</span></div></section>
+      <section className="press-section" aria-label="Публикации"><div><span>РБК</span><span>Forbes</span><span>vc.ru</span><span>Т—Ж</span></div></section>
 
       <PlusDivider />
-      <div id="contact">{['ambient'].map(composition => <section key={composition} className={`connect-section connect-section--${composition}`} aria-labelledby="connect-title">
+      <BlockVariants id="contact" label="Обсудить первые шаги" initialVariant={1}>
+      {['signature', 'ambient'].map(composition => <section key={composition} className={`connect-section connect-section--${composition}`} aria-labelledby="connect-title">
         <div className="connect-copy"><h2 id="connect-title">Обсудить<br/>первые шаги</h2><p>Расскажите, какая задача сейчас важнее всего. Мы вернёмся с вопросами по существу.</p><a href="mailto:info@wmt-ai.ru">info@wmt-ai.ru <SoftPixelNumber arrow compact /></a></div>
-        <form onSubmit={e=>e.preventDefault()}><label>Имя<input name="name" autoComplete="name" placeholder="Как к вам обращаться"/></label><label>Рабочая почта<input type="email" name="email" autoComplete="email" placeholder="name@company.ru"/></label><ContactMessage /><button type="submit"><span>Оставить заявку</span><SoftPixelNumber arrow compact /></button><small>Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</small></form>
-      </section>)}</div>
+        <ContactForm />
+      </section>)}
+      </BlockVariants>
       </div>
       <PlusDivider />
 

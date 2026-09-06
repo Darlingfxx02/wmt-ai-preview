@@ -35,7 +35,7 @@
 .page-finale .entry-options .direction-arrow{width:28px;height:28px}
 .page-finale .connect-section{margin:0;border-radius:0;grid-template-columns:1.15fr 1fr;padding:0;gap:0;background:#fff;color:var(--ink)}
 .page-finale .connect-copy{padding:48px var(--finale-pad);background:var(--ink);color:#fff;min-height:560px;position:relative;overflow:hidden}
-.page-finale .connect-copy::after{content:"";position:absolute;width:clamp(320px,75%,520px);aspect-ratio:314 / 271;background:#ffffff29;right:-18%;bottom:32px;mask:url('/logos/wmt-propeller.svg') center / contain no-repeat;pointer-events:none}
+.page-finale .connect-copy::after{content:"";position:absolute;width:clamp(320px,75%,520px);aspect-ratio:314 / 271;background:#ffffff29;right:-18%;bottom:32px;mask:url('/wmt-ai-preview/logos/wmt-propeller.svg') center / contain no-repeat;pointer-events:none}
 .page-finale .connect-copy>*{position:relative;z-index:1}
 /* Contact compositions share the same content and form. */
 .page-finale .connect-section--signature .connect-copy::after{width:clamp(240px,54%,380px);right:-12%;bottom:28px;background:var(--orange)}
@@ -48,8 +48,8 @@
 .page-finale .connect-section label{color:var(--lower-muted);font-size:14px}
 .page-finale .connect-section input,.page-finale .connect-section textarea{border:0;border-bottom:1px solid #b9bdc4;border-radius:0;background:#fff;padding:14px 0;margin-top:4px;font-size:17px}
 .page-finale .connect-section textarea{min-height:104px}
-.page-finale .connect-section button{border-radius:0;padding:24px;color:#fff;font-size:20px;min-height:78px}
-.page-finale .connect-section small{color:var(--lower-muted)}
+.page-finale .connect-section button{border-radius:20px;padding:24px;color:#fff;font-size:20px;min-height:78px}
+.page-finale .connect-section small{color:var(--lower-muted);max-width:none}
 .finale-method{padding:64px 0 0;background:#fff;scroll-margin-top:90px}
 .finale-method>h2{text-align:center;padding:0 clamp(24px,3.3vw,56px) 48px;margin:0;font-size:clamp(36px,4.2vw,64px);line-height:1.07;letter-spacing:-.045em}
 .finale-method__steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #e3e5e8}
@@ -175,3 +175,22 @@ body .footer.brand-finale{--finale-edge:clamp(24px,4vw,72px);position:relative;i
 /* Reserve the message row so typing never moves the submit button or consent. */
 .page-finale .connect-section .connect-message{display:block;height:129px;min-height:129px}
 .page-finale .connect-section .connect-message textarea{resize:none;min-height:54px;max-height:104px;line-height:24px;overflow-y:hidden;box-sizing:border-box}
+
+.page-finale .press-section{grid-template-columns:1fr}
+.page-finale .press-section>div{min-height:108px}
+.page-finale .press-section span:first-child{border-left:0}
+
+.contact-modal{box-sizing:border-box;width:min(560px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:40px;border:0;border-radius:28px;background:#fff;color:var(--ink);overflow:auto}
+.contact-modal::backdrop{background:rgb(0 0 0 / .6);backdrop-filter:blur(5px)}
+.contact-modal h2{font-size:36px;line-height:1.1;letter-spacing:-.035em;margin:12px 24px 16px 0}
+.contact-modal>p{font-size:16px;margin-bottom:28px}
+.contact-modal__close{position:absolute;right:16px;top:12px;border:0;background:#eceef1;border-radius:50%;width:32px;height:32px;font-size:24px;cursor:pointer}
+.contact-modal form{display:grid;gap:24px}
+.contact-modal label{font-size:14px;color:#696d72}
+.contact-modal input,.contact-modal textarea{display:block;width:100%;box-sizing:border-box;border:0;border-bottom:1px solid #b9bdc4;border-radius:0;padding:14px 0;margin-top:4px;font:inherit;font-size:17px;background:#fff;color:var(--ink)}
+.contact-modal .connect-message{min-height:104px}
+.contact-modal textarea{max-height:160px;min-height:48px;resize:none}
+.contact-modal button[type=submit]{display:flex;justify-content:space-between;align-items:center;gap:24px;border:0;border-radius:20px;min-height:64px;padding:18px 24px;color:#fff;font:inherit;font-size:20px;cursor:pointer;background-image:var(--number-square-noise),var(--wmt-warm-gradient);background-size:56px 84px,100% 100%}
+.contact-modal button[type=submit] .direction-arrow{width:24px;height:24px}
+.contact-modal small{font-size:12px;line-height:1.5;color:#696d72}
+@media(max-width:600px){.contact-modal{padding:28px 24px}.contact-modal h2{font-size:30px}}

@@ -1,0 +1,37 @@
+[
+  {
+    "file": "costs.svg",
+    "original_sha256": "1a673aba400dac208b0fa77b2cdb2e549b4efca86a540ea434d34d59e315e69a",
+    "flat_sha256": "0dc44222d23fb8441c59e3c81b643439c991e032d8ee22b742228f9278e6a1a5"
+  },
+  {
+    "file": "filter.svg",
+    "original_sha256": "adca1b46c8a9ca5601ab7b334a789db0d0b066cae74b1273d70b0104a9942f7b",
+    "flat_sha256": "8b5fe880e0b1c20f9cf9ed54c9f2772a231676b9184a07ce81d7527165650227"
+  },
+  {
+    "file": "opportunities.svg",
+    "original_sha256": "ad74c82c7e030928ce5ace1ef20d5638f294cdcb51d4dbf3099526663f7c25cc",
+    "flat_sha256": "6298f0d13ebf8bcb83728f5344118ff462dc8ecc0ca1daae0999778739dcb058"
+  },
+  {
+    "file": "outcome.svg",
+    "original_sha256": "af4b7352227fa78c10aed15ab499746643b5a13492bd22d6574325f793466aad",
+    "flat_sha256": "e6629a725d0e2e77b2df3f21e9f49a014ebc55b0630eeeac4cbed63ffab171c1"
+  },
+  {
+    "file": "revenue.svg",
+    "original_sha256": "471f0b5f306bde7de5f80cc17caf477e928112b7f83a868402a91fbd7fb75c9e",
+    "flat_sha256": "69483471e3b2b8c52a1081ac794a592c6151d186485bd1b6a02c8f4e154fe934"
+  },
+  {
+    "file": "route.svg",
+    "original_sha256": "1425a55aff2714dad994da99ff92ca1d53f5e17f5d3308a582a1f289a9952f3b",
+    "flat_sha256": "c09c963b101b6ddfced52c4976bb1d4a39ac6788c0620d9cb3546b46a81c4291"
+  },
+  {
+    "file": "system.svg",
+    "original_sha256": "8cd3d8d5134c0ebde942fb5468f4323baab3b7ad46e12565ce0a3e4b6f6e62b1",
+    "flat_sha256": "596e2f476da0eb1cd36478c54b2e9f8cb69839d4ba5a36837afbdcef46b0d237"
+  }
+]

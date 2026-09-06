@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
-import training from './data/training-cases.json';
-import implementation from './data/implementation-cases.json';
+import training from '../../src/data/training-cases.json';
+import implementation from '../../src/data/implementation-cases.json';
 
 const cycleCases = [...training, ...implementation.map(item => ({ ...item, tagLabel: 'Разработка · ' + item.format }))];
 const priority = ['wildberries-transformatsiya', 'tsentralnyi-bank-armenii', 'natsproektstroi'];
@@ -83,19 +83,27 @@ export default function ClientCases({ Arrow }) {
   useEffect(() => {
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     let frame = 0;
-    const update = () => {
+    let displayed = null;
+    let previousTime = 0;
+    const update = (time = performance.now()) => {
       frame = 0;
-      const horizontalPosition = track.current.scrollLeft;
-      section.current.style.setProperty('--cases-viewport', `${document.documentElement.clientWidth}px`);
       const top = section.current.getBoundingClientRect().top;
       const progress = motion.matches ? 1 : Math.max(0, Math.min(1, (innerHeight * .75 - top) / (innerHeight * .63)));
-      const eased = progress * progress * (3 - 2 * progress);
-      reveal.current.style.setProperty('--cases-scale', String(.6 + .4 * eased));
-      reveal.current.style.setProperty('--cases-rise', `${80 * (1 - eased)}px`);
-      // Width/padding changes must not let browser scroll anchoring move the wheel.
+      const target = progress * progress * (3 - 2 * progress);
+      const elapsed = previousTime ? Math.min(64, time - previousTime) : 16;
+      previousTime = time;
+      // Time-based damping absorbs wheel steps consistently at any refresh rate.
+      displayed = displayed === null || motion.matches ? target : displayed + (target - displayed) * (1 - Math.exp(-elapsed / 110));
+      const settling = Math.abs(target - displayed) > .0001;
+      if (!settling) displayed = target;
+      const horizontalPosition = track.current.scrollLeft;
+      section.current.style.setProperty('--cases-viewport', `${document.documentElement.clientWidth}px`);
+      reveal.current.style.setProperty('--cases-scale', String(.6 + .4 * displayed));
+      reveal.current.style.setProperty('--cases-rise', `${80 * (1 - displayed)}px`);
       track.current.scrollLeft = horizontalPosition;
-      // Draw rays in this same frame, after layout, rather than a later resize frame.
       refreshGeometry.current?.();
+      if (settling) frame = requestAnimationFrame(update);
+      else previousTime = 0;
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     window.addEventListener('scroll', schedule, { passive: true });

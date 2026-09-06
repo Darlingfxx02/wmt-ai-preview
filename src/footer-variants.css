@@ -53,7 +53,7 @@ body .footer.footer-lab--silver{background:#2c2d30}
 body .footer.footer-lab{background:var(--ink)}
 .footer.footer-lab::after{content:none}
 .footer-lab .footer-lab__art{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.footer-lab__propeller{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);width:min(90vw,100svh);aspect-ratio:232 / 200;background:#fff;opacity:.045;mask:url('/logos/wmt-propeller.svg') center / contain no-repeat;-webkit-mask:url('/logos/wmt-propeller.svg') center / contain no-repeat}
+.footer-lab__propeller{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);width:min(90vw,100svh);aspect-ratio:232 / 200;background:#fff;opacity:.045;mask:url('/wmt-ai-preview/logos/wmt-propeller.svg') center / contain no-repeat;-webkit-mask:url('/wmt-ai-preview/logos/wmt-propeller.svg') center / contain no-repeat}
 @media(max-width:600px){.footer-lab__propeller{width:125vw;top:68%}}
 
 .footer-lab__bottom{grid-row:3}

@@ -1,26 +1,12 @@
-/* One action per scene; generous empty space and no labels. */
-.why-bento .situation-motion{display:block;width:calc(100% + 64px);height:auto;min-height:180px;margin:auto -32px 0;padding:24px 0 10px;flex-shrink:0;overflow:hidden;pointer-events:none}
-.situation-motion{stroke-linecap:round;stroke-linejoin:round}
-.situation-motion .sm-track{stroke:#48484f;stroke-width:3}
-.situation-motion .sm-route{stroke:url(#wmt-orange-material);stroke-width:3}
-.situation-motion .sm-start,.situation-motion .sm-goal-dot,.situation-motion .sm-solid{fill:url(#wmt-orange-material)}
-.situation-motion .sm-route-step{fill:#53535d;stroke:#252528;stroke-width:4}
-.situation-motion .sm-unselected{opacity:.6}
-.situation-motion .sm-filled-icon{fill:#fff;stroke:none}
-.situation-motion .sm-idea-line{stroke:#81818b;stroke-width:2}
-.situation-motion .sm-bar{fill:#53535d}
-.situation-motion .sm-chart-baseline{stroke:#54545d;stroke-width:1.5}
-.situation-motion .sm-option{fill:#35353b;stroke:#515159;stroke-width:1.5}
-.situation-motion .sm-check{stroke:#252528;stroke-width:3.5}
-.situation-motion .sm-piece{fill:#53535d}
-.situation-motion .sm-paper{fill:#35353b;stroke:#686872;stroke-width:1.5}
-.situation-motion .sm-paper--back{fill:#2c2c30;stroke:#48484f}
-.situation-motion .sm-paper-lines{stroke:#85858f;stroke-width:2}
-.situation-motion .sm-result-arrow{stroke:#93939c;stroke-width:2}
+/* Shared material studies: smoked glass, fine bevels, and warm guided light. */
+.why-bento .situation-motion{display:block;width:calc(100% + 64px);height:auto;min-height:180px;margin:auto -32px 0;padding:16px 0 6px;flex-shrink:0;overflow:hidden;pointer-events:none}
+.situation-motion,.bento-effect-art{stroke-linecap:round;stroke-linejoin:round}
 .why-bento .situation-motion--wide{width:100%;height:260px;min-height:0;margin:0 0 16px;padding:8px 0 0}
+.why-bento__effects .bento-effect-art{width:56px;height:56px;flex:0 0 46px;margin:-2px 0 0}
 @media(min-width:601px) and (max-width:1000px){.why-bento .why-bento__situation:nth-child(3) .situation-motion{width:100%;margin:0;padding-top:0}}
 @media(max-width:600px){
  .why-bento .situation-motion{width:calc(100% + 48px);margin:auto -24px 0;padding-top:20px}
  .why-bento .why-bento__situation:nth-child(3) .situation-motion{width:calc(100% + 48px);margin:auto -24px 0}
  .why-bento .situation-motion--wide{width:100%;height:210px;min-height:0;margin:0;padding:8px 0 0}
+ .why-bento__effects .bento-effect-art{width:56px;height:56px;flex-basis:46px;margin-right:0}
 }

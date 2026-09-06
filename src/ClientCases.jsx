@@ -3,6 +3,7 @@ import training from '../../src/data/training-cases.json';
 import implementation from '../../src/data/implementation-cases.json';
 
 const cycleCases = [...training, ...implementation.map(item => ({ ...item, tagLabel: 'Разработка · ' + item.format }))];
+for (const item of cycleCases) { for (const key of ['photo', 'logo']) { if (item[key]?.startsWith('/')) item[key] = '/wmt-ai-preview' + item[key]; } }
 const priority = ['wildberries-transformatsiya', 'tsentralnyi-bank-armenii', 'natsproektstroi'];
 cycleCases.sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
 
@@ -66,6 +67,12 @@ function CurvedCaseScrubber({ value, max, radius, onChange }) {
 export default function ClientCases({ Arrow }) {
   const sliceId = `case-slice-${useId().replace(/:/g, "")}`;
   const track = useRef(null);
+  const mobileTrack = useRef(null);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const moveMobile = direction => {
+    const el = mobileTrack.current;
+    el.scrollBy({left:direction * (el.firstElementChild.offsetWidth + 16),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+  };
   const section = useRef(null);
   const reveal = useRef(null);
   const guides = useRef(null);
@@ -81,7 +88,7 @@ export default function ClientCases({ Arrow }) {
   const [position, setPosition] = useState({ first: 0, last: 2, atEnd: false, scroll: 0, maxScroll: 0 });
   const [selected, setSelected] = useState(null);
   useEffect(() => {
-    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const motion = matchMedia('(prefers-reduced-motion: reduce), (max-width: 1100px)');
     let frame = 0;
     let displayed = null;
     let previousTime = 0;
@@ -121,11 +128,12 @@ export default function ClientCases({ Arrow }) {
     const el = track.current;
     const cards = [...el.querySelectorAll(':scope > .case-preview')];
     let positioned = false;
-    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const motion = matchMedia('(prefers-reduced-motion: reduce), (max-width: 1100px)');
     let frame = 0;
     const update = () => {
       frame = 0;
       const width = el.clientWidth;
+      if (!width) return;
       if (!positioned && width) {
         const conversion = cards[cycleLength + 2];
         el.scrollLeft = Math.max(0, conversion.offsetLeft + conversion.offsetWidth / 2 - width / 2);
@@ -301,7 +309,7 @@ export default function ClientCases({ Arrow }) {
     const el = track.current;
     cancelAnimationFrame(moveFrame.current);
     const distance = direction * el.clientWidth * .8;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (matchMedia('(prefers-reduced-motion: reduce), (max-width: 1100px)').matches) {
       el.scrollLeft += distance;
       refreshGeometry.current?.();
       return;
@@ -324,6 +332,20 @@ export default function ClientCases({ Arrow }) {
     <header className="client-cases__heading">
       <div><h2 id="client-cases-title"><span className="client-cases__title-end"><svg className="hero-nomu-chevrons client-cases__chevrons client-cases__chevrons--left" viewBox="0 0 60 56" aria-hidden="true"><polyline points="8 8 24 28 8 48" /><polyline points="36 8 52 28 36 48" /></svg>Нам</span> доверяют лидеры <span className="client-cases__title-end">рынка<svg className="hero-nomu-chevrons client-cases__chevrons" viewBox="0 0 60 56" aria-hidden="true"><polyline points="8 8 24 28 8 48" /><polyline points="36 8 52 28 36 48" /></svg></span></h2></div>
     </header>
+    <div className="mobile-cases">
+      <div className="mobile-cases__track" ref={mobileTrack} id="mobile-case-track" aria-label="Кейсы клиентов" onScroll={event => {
+        const el=event.currentTarget;
+        setMobileIndex(el.scrollLeft >= el.scrollWidth - el.clientWidth - 2 ? cycleLength - 1 : Math.round(el.scrollLeft / (el.firstElementChild.offsetWidth + 16)));
+      }}>
+        {cycleCases.map(item => <article className="mobile-cases__card" key={item.id}>
+          {item.conversion ? <a className="mobile-cases__conversion" href="#contact"><Arrow arrow compact/><h3>Ваш следующий кейс — с нами</h3><span>Обсудить задачу →</span></a> : <button type="button" onClick={() => setSelected(item)} aria-label={`Открыть кейс: ${item.client}`}>
+            <div className="mobile-cases__visual">{item.photo ? <img src={item.photo} alt="" loading="lazy"/> : item.logo ? <img className="mobile-cases__logo" src={item.logo} alt="" loading="lazy"/> : <strong>{item.client}</strong>}</div>
+            <div className="mobile-cases__copy"><h3>{item.client}</h3><p>{item.short}</p><span>Подробнее <Arrow arrow compact/></span></div>
+          </button>}
+        </article>)}
+      </div>
+      <div className="mobile-cases__controls"><span>{mobileIndex+1} / {cycleLength}</span><button type="button" disabled={mobileIndex===0} onClick={() => moveMobile(-1)} aria-label="Предыдущий кейс">←</button><button type="button" disabled={mobileIndex>=cycleLength-1} onClick={() => moveMobile(1)} aria-label="Следующий кейс">→</button></div>
+    </div>
     <div ref={reveal} className="case-wheel-reveal">
     <div className="case-wheel-stage">
     <svg ref={base} className="case-wheel-underlay" aria-hidden="true"><path fill="#fff" /></svg>

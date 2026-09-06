@@ -706,6 +706,7 @@ function MethodJourney() {
     let frame = 0;
     const update = () => {
       frame = 0;
+      if (window.innerWidth <= 1100) { section.style.setProperty('--journey-tail', '0px'); return; }
       const stage = section.querySelector('.method-journey__stage');
       const windowBox = section.querySelector('.method-journey__window');
       const trailingSpace = Math.max(0, stage.getBoundingClientRect().bottom - windowBox.getBoundingClientRect().bottom);
@@ -753,7 +754,7 @@ function MethodJourney() {
   const goToStep = (index) => {
     const section = ref.current;
     const stage = section.querySelector('.method-journey__stage');
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.innerWidth <= 1100 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       section.querySelectorAll('.method-journey__card')[index].scrollIntoView({ block: 'center', behavior: 'instant' });
       return;
     }
@@ -968,6 +969,10 @@ function EventScene() {
     let frame = 0;
     const update = () => {
       frame = 0;
+      if (window.innerWidth <= 1100) {
+        scene.style.setProperty('--event-exit', '0');
+        return;
+      }
       const travel = Math.max(1, scene.offsetHeight - scene.querySelector('.event').offsetHeight);
       const progress = Math.max(0, Math.min(1, (-scene.getBoundingClientRect().top - 32) / Math.max(1, travel - 64)));
       const eased = progress * progress * (3 - 2 * progress);
@@ -1071,7 +1076,7 @@ function App() {
       <div className="page-frame">
       <section className="trust-band" aria-label="Клиенты WMT AI">
         <div className="company-grid">
-          {['Wildberries','Нацпроектстрой','Фора-Банк','Сбер','T1','T2'].map(x => <span key={x}>{x}</span>)}
+          {[['Wildberries','wb-full-black'],['Нацпроектстрой','natsproekt'],['Фора-Банк','forabank'],['Сбер','sberbank'],['T1','t1'],['T2','t2']].map(([name, file]) => <span key={file}><img src={`/wmt-ai-preview/logos/${file}.svg`} alt={name} /></span>)}
         </div>
       </section>
 
@@ -1206,7 +1211,7 @@ function App() {
       </section>)}
       </BlockVariants>
       </div>
-      <PlusDivider />
+      <PlusDivider className="contact-bottom-divider" />
 
       </div>
       </div>
